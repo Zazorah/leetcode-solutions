@@ -35,8 +35,8 @@ const template = `// Problem: ${problemName}
 // Link: 
 
 function ${problemName.replace(/\s+/g, "")}(/* params */): void {
-    // Your solution here
-    return;
+  // Your solution here
+  return;
 }
 
 // Test cases
