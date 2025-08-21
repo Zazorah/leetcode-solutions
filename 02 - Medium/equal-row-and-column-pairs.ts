@@ -2,7 +2,8 @@
 // Difficulty: Medium
 // Link: https://leetcode.com/problems/equal-row-and-column-pairs/description/?envType=study-plan-v2&envId=leetcode-75
 
-function equalPairs(grid: number[][]): number {
+// In-Efficient First Attempt
+function _equalPairs(grid: number[][]): number {
   const n = grid.length;
 
   function areEqual(rowIndex: number, colIndex: number) {
@@ -22,6 +23,30 @@ function equalPairs(grid: number[][]): number {
         result++;
       }
     }
+  }
+
+  return result;
+}
+
+// Attempt Using Maps
+function equalPairs(grid: number[][]): number {
+  const n = grid.length;
+
+  const rowMap = new Map<string, number>();
+  for (let y = 0; y < n; y++) {
+    const rowKey = grid[y]!.join(",");
+    rowMap.set(rowKey, (rowMap.get(rowKey) || 0) + 1);
+  }
+
+  let result = 0;
+  for (let x = 0; x < n; x++) {
+    const column: number[] = [];
+    for (let y = 0; y < n; y++) {
+      column.push(grid[y]![x]!);
+    }
+
+    const colKey = column.join(",");
+    result += rowMap.get(colKey) || 0;
   }
 
   return result;
