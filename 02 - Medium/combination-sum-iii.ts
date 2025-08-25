@@ -6,20 +6,25 @@ function combinationSum3(k: number, n: number): number[][] {
   const result: number[][] = [];
 
   function _step(
-    values: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    start: number = 1,
     digits: number[] = [],
     runningSum: number = 0
   ) {
-    if (runningSum === n && digits.length == k) {
-      result.push(digits);
+    if (digits.length === k) {
+      if (runningSum === n) {
+        result.push([...digits]);
+      }
       return;
     }
 
-    while (values.length > 0) {
-      const value = values.shift()!;
-      if (runningSum + value <= n) {
-        _step([...values], [...digits, value], runningSum + value);
-      }
+    if (digits.length > k || runningSum > n) {
+      return;
+    }
+
+    for (let i = start; i <= 9; i++) {
+      digits.push(i);
+      _step(i + 1, digits, runningSum + i);
+      digits.pop();
     }
   }
 
