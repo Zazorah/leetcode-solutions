@@ -34,6 +34,7 @@ class ParkingSystem {
     return false;
   }
 }
+
 // Test cases
 const parking = new ParkingSystem(1, 1, 0);
 console.log(parking.addCar(1));
